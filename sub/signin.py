@@ -23,7 +23,6 @@ async def sign_main(email, password):
         while True:
             print('\n1 - Resume and skip login')
             print('2 - Drop and connect a new account')
-            # Prompt for resume
             resume = input('Enter your choice: ')
             if resume == '1':
                 # print_user_info_message(user_info)
@@ -40,12 +39,14 @@ async def sign_main(email, password):
         while True:
             # Prompt for email
             email = input('Enter your email: ')
+            email = "nayrananda1998@gmail.com"
             if validate_email(email):
                 break # Exit the loop on valid selection
             else:
                 print(colored('Invalid email format.', 'yellow'))
         # Prompt for password
         password = input('Enter your password: ')
+        password = "Ayush@9028"
 
         # Attempt login
         sign_in_page = await login()
