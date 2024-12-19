@@ -1,0 +1,1 @@
+{"account_type": "demo", "trading_type": "compounding", "bet_level": 3, "bet_amounts": [100, 300, 550], "financial_instruments": "cryptocurrency", "market_type": "otc", "time_option": 1, "trade_time": 60, "minimum_return": 90, "trade_option": "random", "profit_target": 1000, "loss_target": 300}
