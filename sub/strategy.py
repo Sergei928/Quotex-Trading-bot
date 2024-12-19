@@ -17,18 +17,10 @@ async def strategies(user_input={}, instruments_list={}, trade_data={}, order_ty
     global trade_direction, vo_value
     if hasattr(asyncio, 'WindowsSelectorEventLoopPolicy'):
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
-    current_time = int(time.time())
     if order_type == "closed_order":
         vo = VolumeOscillator()
         trade_direction, vo_value = vo.determine_next_trade(candle_data['candles'])
         await asyncio.sleep(60)
-    # print(order_type)
-    # print("trade_data ======> ", trade_data)
-    # if trade_data.get('closed_order', True):
-    #     await asyncio.sleep(10)
-    # trades_history = await get_trades_history(user_input['account_type'], proxy='')
-    # if trade_data.get('closed_order', True):
-    #     await analyze_volume_oscillator(trades_history)
     
     market_type = user_input.get('market_type', 'all')
     financial_instruments = user_input.get('financial_instruments', 'all')
@@ -40,9 +32,6 @@ async def strategies(user_input={}, instruments_list={}, trade_data={}, order_ty
     asset, asset_return, asset_is_active = asset_info[1], asset_info[18], asset_info[14]
     if not asset_is_active or user_input['minimum_return'] > asset_return or trade_data['result'] == '??':
         return False
-
-    trade_option = await get_tradeoption (user_input, instruments_list, trade_data)
-    #random.choice(['call', 'put']) if user_input['trade_option'] == 'random' else user_input['trade_option']
 
     is_demo = {'demo':1, 'live':0}[user_input['account_type']]
     bet_level = user_input['bet_level'] - 1
