@@ -17,11 +17,11 @@ async def strategies(user_input={}, instruments_list={}, trade_data={}, order_ty
     global trade_direction, vo_value
     if hasattr(asyncio, 'WindowsSelectorEventLoopPolicy'):
         asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
     if order_type == "closed_order":
         vo = VolumeOscillator()
         trade_direction, vo_value = vo.determine_next_trade(candle_data['candles'])
         await asyncio.sleep(60)
-    
     market_type = user_input.get('market_type', 'all')
     financial_instruments = user_input.get('financial_instruments', 'all')
     market_type = next(iter(instruments_list)) if market_type == 'all' else market_type
@@ -142,10 +142,10 @@ def calculate_stats(rows):
             total_amount += row[3]
         except ValueError:
             continue
-        if row[7] in counts:
+        if row[6] in counts:
             counts[row[6]] += 1
-        if row[8] in counts:
-            counts[row[8]] += 1
+        if row[7] in counts:
+            counts[row[7]] += 1
 
     average_return = (row[10]*100)/total_amount if total_amount else 0
 
